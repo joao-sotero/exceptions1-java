@@ -1,6 +1,7 @@
 package application;
 
 import java.text.ParseException;
+
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Scanner;
@@ -36,23 +37,19 @@ public class Program  {
 		checkIn = sdf.parse(sc.next());
 		System.out.println("Check-Out date (DD/MM/YYYY): ");
 		checkOut = sdf.parse(sc.next());
+		String error = reservation.updateDates(checkIn, checkOut);
 		
 		
-		Date now = new Date();
-		if (checkIn.before(now) || checkOut.before(now)) {
-		System.out.println("Error in reservation: Check-out date must be after check-in date: ");
+		if(error != null) {
+				System.out.println("Error in reservation: " + error);
+			}else {
+			System.out.println("Reservation: "+ reservation.toString());
 		}
-		else if(!checkOut.after(checkIn)) {
-			System.out.println("Error in reservation: Check-out date must be after check-in date:");
-		}else {
-			reservation.updateDates(checkIn, checkOut);
-			System.out.println("Reservation: "+ reservation);
 		}
-		
 		//reservation.updateDates(checkIn, checkOut);
 		//System.out.println("Reservation: "+ reservation);
 		
-		}
+		
 		
 		
 		
